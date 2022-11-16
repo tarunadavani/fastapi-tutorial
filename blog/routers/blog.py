@@ -3,7 +3,7 @@ from typing import List
 from fastapi import APIRouter, Depends, Response, status
 from sqlalchemy.orm import Session
 
-from .. import database, schemas
+from .. import database, schemas, oauth2
 from .. repository import blog
 
 router = APIRouter(
@@ -20,7 +20,7 @@ def create(request: schemas.Blog, db: Session = Depends(get_db)):
 
 
 @router.get('/', status_code=status.HTTP_200_OK, response_model=List[schemas.ShowBlog])
-def all_blogs(db: Session = Depends(get_db)):
+def all_blogs(db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
     return blog.get_all(db)
 
 @router.get('/{id}', status_code=status.HTTP_200_OK, response_model=schemas.ShowBlog)
