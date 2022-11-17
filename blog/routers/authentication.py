@@ -12,7 +12,7 @@ router = APIRouter(
 get_db=database.get_db
 
 
-@router.post('/', status_code=status.HTTP_200_OK)
+@router.post('/login', status_code=status.HTTP_200_OK)
 def login(request: OAuth2PasswordRequestForm = Depends(),
                 db: Session = Depends(get_db)):
     user = db.query(models.User).filter(models.User.email==request.username).first()
@@ -24,4 +24,6 @@ def login(request: OAuth2PasswordRequestForm = Depends(),
                             detail='Invalid Password')
     access_token = token.create_access_token(
         data={"sub": user.email})
-    return {"access_token": access_token, "token_type": "bearer"}
+    refresh_token = token.create_refresh_token(
+        data={"sub": user.email})
+    return {"access_token": access_token, "refresh_token": refresh_token, "token_type": "bearer"}
