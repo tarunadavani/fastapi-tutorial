@@ -16,7 +16,7 @@ get_db=database.get_db
 
 @router.post('/', status_code=status.HTTP_201_CREATED)
 def create_user(request: schemas.User,
-                db: Session = Depends(get_db), current_user: schemas.User = Depends(oauth2.get_current_user)):
+                db: Session = Depends(get_db)):
     return user.create(request, db)
 
 

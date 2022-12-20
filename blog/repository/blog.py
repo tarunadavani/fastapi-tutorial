@@ -44,3 +44,10 @@ def show(id: int, db: Session):
                             detail=f'Blog with the {id} is not available')
     return blog
 
+
+# deployment docker
+# postgres
+# pass multiple query parameters 
+# only created user can delete, update permission
+# how to generate multiple models autogenerate
+# run with python command
