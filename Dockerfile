@@ -1,8 +1,9 @@
 FROM python:3.9
-WORKDIR /blog
+WORKDIR /app
 COPY . .
-RUN pip install --no-cache-dir --upgrade -r ./requirements.txt
+RUN pip install --upgrade -r ./requirements.txt
+# RUN pip install --no-cache-dir --upgrade -r ./requirements.txt
 EXPOSE 8000
-WORKDIR /blog
-ENV PYTHONPATH=/blog
-CMD ["uvicorn", "blog.main:app", "--host", "0.0.0.0", "--port", "8000"]
+WORKDIR /app
+ENV PYTHONPATH=/app/app
+CMD ["uvicorn", "main:app", "--host", "0.0.0.0", "--port", "8000"]

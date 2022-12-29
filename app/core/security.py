@@ -1,7 +1,10 @@
+"""
+    SECURITY FILE
+"""
 from datetime import datetime, timedelta
 from jose import JWTError, jwt
-from .schemas import TokenData
-from core.configuration import settings
+from app.schemas.schemas import TokenData
+from app.core.configuration import settings
 
 
 ACCESS_TOKEN_EXPIRE_MINUTES = settings.ACCESS_TOKEN_EXPIRE_MINUTES
